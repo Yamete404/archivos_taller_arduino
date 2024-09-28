@@ -1,0 +1,82 @@
+int led1=13;
+int led2=12;
+int led3=11;
+int led4=10;
+int led5=9;
+
+int c;
+int vel;
+int pote=A5;
+int motor=6;
+
+void setup()
+{
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode(led5, OUTPUT);
+  pinMode(motor, OUTPUT);
+}
+
+void loop()
+{
+  vel=analogRead(pote);//lee de 0 a 1023
+  vel=vel/4;
+  analogWrite(motor, vel);//envía de 0 a 255
+  if(vel>0 && vel<=45)
+  {
+    digitalWrite(led1,HIGH);
+    digitalWrite(led2,LOW);
+    digitalWrite(led3,LOW);
+    digitalWrite(led4,LOW);
+    digitalWrite(led5,LOW);
+    
+  }
+  else if(vel>45 && vel<=90)
+  {
+    digitalWrite(led1,HIGH);
+    digitalWrite(led2,HIGH);
+    digitalWrite(led3,LOW);
+    digitalWrite(led4,LOW);
+    digitalWrite(led5,LOW);
+  }
+  else if (vel>90 && vel<=135)
+  {
+    digitalWrite(led1,HIGH);
+    digitalWrite(led2,HIGH);
+    digitalWrite(led3,HIGH);
+    digitalWrite(led4,LOW);
+    digitalWrite(led5,LOW);
+
+  }
+  else if (vel>135 && vel<=180)
+  {
+    digitalWrite(led1,HIGH);
+    digitalWrite(led2,HIGH);
+    digitalWrite(led3,HIGH);
+    digitalWrite(led4,HIGH);
+    digitalWrite(led5,LOW);
+  }
+   else if (vel>180 && vel<=225)
+  {
+    digitalWrite(led1,HIGH);
+    digitalWrite(led2,HIGH);
+    digitalWrite(led3,HIGH);
+    digitalWrite(led4,HIGH);
+    digitalWrite(led5,HIGH);
+  }   
+  else if(vel>225 && vel<=255)
+  {
+    for(c=14;c<=9;c=c+1)
+    { 
+      digitalWrite(c,HIGH);
+    }
+    delay(1000);
+    for(c=14;c<=9;c=c+1)
+    {
+     digitalWrite(c,LOW);
+    }
+   delay(1000); 
+  }
+}
