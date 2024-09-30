@@ -43,12 +43,22 @@ void readSensor()
   digitalWrite(ultraTRIG,LOW);
   sensorTime=pulseIn(ultraECHO,HIGH);
   sensorDistance=sensorTime/58.2;
+  //puerto serie
   Serial.print("Distancia: ");
   Serial.print(sensorDistance);
-  Serial.print("                  valorIR:");
+  Serial.print(" cm");
+  Serial.print("                  valorIR: ");
   Serial.print(readSensorirA);
   Serial.print(", ");
   Serial.print(readSensorirB);
+  Serial.print(" / ");
+  if(readSensorirA<400||readSensorirB<400)
+  {
+    Serial.print("color blanco");
+  } else
+    {
+      Serial.print("color negro");
+    }
   Serial.println();
   delay(1000);
 }
