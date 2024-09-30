@@ -1,5 +1,5 @@
 /////COSAS PARA TERMINAR////
-/*ninguna muajajajaja >:D*/
+/*¿Esto funcionará?*/
 /// variables ///
 int in1motorA=3;
 int in2motorA=10;
@@ -12,23 +12,23 @@ int velEM=255;
 /// sensor de ultrasonido ///
 int ultraTRIG=6;
 int ultraECHO=7;
-/// sensores infrarojos ///
-int sensorirA=A7;
-int sensorirB=A6;
-// pruebas de variables //
 long sensorTime;
 int sensorDistance;
 int readSensorirA;
 int readSensorirB;
+/// sensores infrarojos ///
+int sensorirA=A7;
+int sensorirB=A6;
+
 //funciones propias//
-void movement(bool OnemotorA,bool TwomotorA,bool OnemotorB,bool TwomotorB, int velocE)
+void movement(bool OnemotorA,bool TwomotorA,bool OnemotorB,bool TwomotorB, int velocEA, int velocEB)
 {
   digitalWrite(in1motorA, OnemotorA);
   digitalWrite(in2motorA, TwomotorA);
   digitalWrite(in1motorB, OnemotorB);
   digitalWrite(in2motorB, TwomotorB);
-  digitalWrite(ena, velocE);
-  digitalWrite(enb, velocE);
+  digitalWrite(ena, velocEA);
+  digitalWrite(enb, velocEB);
 }
 void readSensor()
 {
@@ -81,7 +81,7 @@ void setup() {
   pinMode(ultraTRIG, OUTPUT);
   pinMode(ultraECHO, INPUT);
 }
-
+/*
 void loop() {
   //movimientos//
   readSensor();
@@ -102,4 +102,25 @@ void loop() {
     movement(1,0,1,0,velE);//delante
     delay(5000);
   }
+} */
+void loop()
+{
+  readSensor();
+  do {
+    movement (0,1,0,1,velE,velE); //derecha
+    delay(200);
+  } while (sensorDistance>=20);
+  do {
+    movement(1,0,1,0,velEM,velEM); //adelante
+    delay(80);
+  } while (readSensorirA>400/*900*/||readSensorirB>400/*900*/||sensorDistance<=20);
+  
+  movement(0,0,0,0,velE,velE); //detener
+  delay(1000);
+  movement(1,0,1,0,velEM,velE); //izquierda
+  delay(800);
+  movement(1,0,1,0,velEM,velEM); //adelante
+  delay(300);
+  movement(0,0,0,0,velE,velE); //detener
+  delay(2000);
 }
