@@ -81,43 +81,46 @@ void setup() {
   pinMode(ultraTRIG, OUTPUT);
   pinMode(ultraECHO, INPUT);
 }
-/*
-void loop() {
+
+/*void loop() {
   //movimientos//
   readSensor();
   if(sensorDistance<=20&&sensorDistance>0)
   {
-    movement(1,0,1,0,velEM);//embestir
+    movement(1,0,1,0,velEM,velEM);//embestir
   }
   else if(readSensorirA<400||readSensorirB<400)
   {
-    movement(0,1,0,1,velE);//retroceder
+    movement(0,1,0,1,velE,velE);//retroceder
     delay(500);
-    movement(1,0,0,0,velE);//giro 180
+    movement(1,0,0,0,velEM,velE);//giro 180
     delay(200);
-    movement(1,0,1,0,velE);//delante
+    movement(0,1,0,0,velE,velEM);//giro 180
+    delay(200);
+    movement(1,0,1,0,velE,velE);//delante
   }
   else
   {
-    movement(1,0,1,0,velE);//delante
+    movement(1,0,1,0,velE,velE);//delante
     delay(5000);
   }
-} */
+}*/
 void loop()
 {
   readSensor();
+  //busqueda
   do {
-    movement (0,1,0,1,velE,velE); //derecha
+    movement (0,1,0,1,velEM,velE); //derecha
     delay(200);
   } while (sensorDistance>=20);
   do {
     movement(1,0,1,0,velEM,velEM); //adelante
     delay(80);
   } while (readSensorirA>400/*900*/||readSensorirB>400/*900*/||sensorDistance<=20);
-  
+  //movimientos
   movement(0,0,0,0,velE,velE); //detener
   delay(1000);
-  movement(1,0,1,0,velEM,velE); //izquierda
+  movement(1,0,1,0,velE,velEM); //izquierda
   delay(800);
   movement(1,0,1,0,velEM,velEM); //adelante
   delay(300);
